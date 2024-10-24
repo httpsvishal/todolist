@@ -45,6 +45,7 @@ ul{
     list-style: none;
     width: 100%;
     gap: 12px;
+    padding-block: 10px;
     overflow-x:hidden;
     overflow-y: auto;
 }
