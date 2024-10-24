@@ -21,6 +21,7 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
     let taskName = document.createElement("span");
     taskName.classList.add("task-title");
     taskName.innerText = newTaskName;
+    if(taskStatusData=="checked") taskName.classList.add("checked");
     taskWrapper.append(taskName);
 
     let taskStatus = document.createElement("img");
@@ -57,11 +58,13 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
             allTasks[id].status = "unchecked";
         }
         taskName.classList.toggle("checked");
+        saveChangesToLocal();
     })
 
     removeIcon.addEventListener("click", () => {
         li.remove();
         delete allTasks[id];
+        saveChangesToLocal();
     })
 
     let isTask = true;
@@ -70,7 +73,7 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
     let editTaskInput = document.createElement("input");
     editTaskInput.type = "text";
     editTaskInput.setAttribute("required", true);
-    editTaskInput.setAttribute("autofocus",true);
+    editTaskInput.setAttribute("autofocus", true);
     let editButton = document.createElement("button");
     editButton.innerText = "Save Changes";
 
@@ -85,16 +88,17 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
         }
     })
 
-    let saveChanges = (e) =>{
+    let saveChanges = (e) => {
         e.preventDefault();
         editTaskForm.remove();
         taskName.innerText = editTaskInput.value;
         taskWrapper.append(taskName);
-        isTask=true;
+        isTask = true;
         allTasks[id].taskName = taskName.innerText;
+        saveChangesToLocal();
     }
 
-    editTaskForm.addEventListener("submit",saveChanges);
+    editTaskForm.addEventListener("submit", saveChanges);
 }
 
 if (localStorage.getItem("allTasks") !== null) {
@@ -113,9 +117,14 @@ const addTask = (e) => {
     let newTaskName = newTaskInput.value;
     createTask(newTaskName);
     newTaskInput.value = "";
+    saveChangesToLocal();
 }
 
 taskForm.addEventListener("submit", addTask);
+
+const saveChangesToLocal = () => {
+    localStorage.setItem("allTasks", JSON.stringify(allTasks));
+}
 
 addEventListener("pagehide", () => {
     localStorage.setItem("allTasks", JSON.stringify(allTasks));
