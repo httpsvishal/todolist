@@ -25,8 +25,11 @@ createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
     taskName.innerText = newTaskName;
 
     let taskStatus = document.createElement("img");
-    taskStatus.src = uncheckedUrl ;
     taskStatus.dataset.status = taskStatusData;
+    if(taskStatus.dataset.status == "checked")
+        taskStatus.src = checkedUrl;
+    else
+    taskStatus.src = uncheckedUrl ;
 
     let removeIcon = document.createElement("img");
     removeIcon.src = removeSvgUrl;
