@@ -46,7 +46,10 @@ ul{
     gap: 12px;
     overflow-x:hidden;
     overflow-y: auto;
-    
+}
+button{
+    background:none;
+    outline: none;
 }
 li{
     display: flex;

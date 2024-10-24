@@ -81,6 +81,6 @@ const addTask = (e)=>{
 
 taskForm.addEventListener("submit",addTask);
 
-addEventListener("unload",()=>{
+document.addEventListener("visibilitychange",()=>{
     localStorage.setItem("allTasks",JSON.stringify(allTasks));
 })
