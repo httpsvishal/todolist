@@ -81,6 +81,6 @@ const addTask = (e)=>{
 
 taskForm.addEventListener("submit",addTask);
 
-document.addEventListener("visibilitychange",()=>{
+addEventListener("pagehide",()=>{
     localStorage.setItem("allTasks",JSON.stringify(allTasks));
 })
