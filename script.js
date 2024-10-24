@@ -60,17 +60,17 @@ createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
             taskStatus.dataset.status = "unchecked";
             allTasks[id].status = "unchecked";
         }
-        localStorage.setItem("allTasks",JSON.stringify(allTasks));
+        // localStorage.setItem("allTasks",JSON.stringify(allTasks));
     })
 
 
     removeIcon.addEventListener("click",()=>{
         li.remove();
         delete allTasks[id];
-        localStorage.setItem("allTasks",JSON.stringify(allTasks));
+        // localStorage.setItem("allTasks",JSON.stringify(allTasks));
     })
     
-    localStorage.setItem("allTasks",JSON.stringify(allTasks));
+    
     // localStorage.setItem("allTasks",JSON.stringify(allTasks));
 }
 
@@ -98,4 +98,6 @@ const addTask = (e)=>{
 
 taskForm.addEventListener("submit",addTask);
 
-
+addEventListener("unload",()=>{
+    localStorage.setItem("allTasks",JSON.stringify(allTasks));
+})
