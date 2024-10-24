@@ -101,3 +101,6 @@ h1{
 .edit-task-form button:hover{
     transform: scale(1.1);
 }
+.checked{
+    text-decoration-line: line-through;
+}

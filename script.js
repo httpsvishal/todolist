@@ -56,6 +56,7 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
             taskStatus.dataset.status = "unchecked";
             allTasks[id].status = "unchecked";
         }
+        taskName.classList.toggle("checked");
     })
 
     removeIcon.addEventListener("click", () => {
