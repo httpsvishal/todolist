@@ -21,7 +21,7 @@ main{
     height: 100dvh;
     gap: 20px;
 }
-form{
+#todo-form{
     width: 100%;
     display: flex;
     border: 2px solid #1C274C;
@@ -61,17 +61,43 @@ li{
     
 }
 .task-title{
-    flex-grow: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-grow: 1;
 }
 li img{
     height: 28px;
 }
 img:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 h1{
     color: #1C274C;
     font-size: 36px ;
+}
+.task-title-wrapper{
+    flex-grow: 1;
+    display: flex;
+}
+.edit-task-form {
+    display: flex;
+    width: 100%;
+    padding-right: 20px;
+}
+.edit-task-form input{
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    flex-grow: 1;
+}
+.edit-task-form button{
+    border: 1px solid #1C274C;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 16px;
+    text-wrap: nowrap;
+}
+.edit-task-form button:hover{
+    transform: scale(1.1);
 }
