@@ -8,10 +8,6 @@ let checkedUrl = "./assets/checked-logo.svg";
 let allTasks = {};
 let taskId = 1;
 
-
-
-
-
 createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
     if(!id){
         id = taskId;
@@ -37,8 +33,6 @@ createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
     li.append(taskName,taskStatus,removeIcon);
     tasksContainer.append(li);
 
-    //Save to LocalStorage
-
     let taskData = {
         "taskName" : newTaskName, 
         status: taskStatusData
@@ -46,7 +40,6 @@ createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
     console.log(taskData,newTaskName);
     allTasks[id] = taskData;
     
-
     //Added EventListeners
     taskStatus.addEventListener("click",()=>{
         console.log("hey");
@@ -60,21 +53,13 @@ createTask = (newTaskName,taskStatusData ="unchecked",id ) =>{
             taskStatus.dataset.status = "unchecked";
             allTasks[id].status = "unchecked";
         }
-        // localStorage.setItem("allTasks",JSON.stringify(allTasks));
     })
-
 
     removeIcon.addEventListener("click",()=>{
         li.remove();
         delete allTasks[id];
-        // localStorage.setItem("allTasks",JSON.stringify(allTasks));
     })
-    
-    
-    // localStorage.setItem("allTasks",JSON.stringify(allTasks));
 }
-
-
 
 if(localStorage.getItem("allTasks") !== null){
     let allPrevTasks = JSON.parse(localStorage.getItem("allTasks"));
@@ -87,14 +72,12 @@ if(localStorage.getItem("allTasks") !== null){
     })
 }
 
-
 const addTask = (e)=>{
     e.preventDefault();
     let newTaskName = newTaskInput.value;
     createTask(newTaskName);
     newTaskInput.value="";
 }
-
 
 taskForm.addEventListener("submit",addTask);
 
