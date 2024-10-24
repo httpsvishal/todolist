@@ -59,6 +59,7 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
         }
         taskName.classList.toggle("checked");
         saveChangesToLocal();
+        fetchAndShowTasks();
     })
 
     removeIcon.addEventListener("click", () => {
@@ -101,15 +102,23 @@ createTask = (newTaskName, taskStatusData = "unchecked", id) => {
     editTaskForm.addEventListener("submit", saveChanges);
 }
 
-if (localStorage.getItem("allTasks") !== null) {
-    let allPrevTasks = JSON.parse(localStorage.getItem("allTasks"));
-    allkeys = Object.keys(allPrevTasks);
-    if (allkeys.length > 0)
-        taskId = Math.max(...allkeys) + 1;
-    console.log(taskId)
-    allkeys.forEach((key) => {
-        createTask(allPrevTasks[key].taskName, allPrevTasks[key].status, key);
-    })
+const fetchAndShowTasks = ()=>{
+    tasksContainer.innerHTML = "";
+    if (localStorage.getItem("allTasks") !== null) {
+        let allPrevTasks = JSON.parse(localStorage.getItem("allTasks"));
+        allkeys = Object.keys(allPrevTasks);
+        allkeys.sort((a,b)=>{
+            if(allPrevTasks[a].status==="unchecked")
+                return -1;
+            return 1;
+        })
+        if (allkeys.length > 0)
+            taskId = Math.max(...allkeys) + 1;
+        console.log(taskId)
+        allkeys.forEach((key) => {
+            createTask(allPrevTasks[key].taskName, allPrevTasks[key].status, key);
+        })
+    }
 }
 
 const addTask = (e) => {
@@ -129,3 +138,5 @@ const saveChangesToLocal = () => {
 addEventListener("pagehide", () => {
     localStorage.setItem("allTasks", JSON.stringify(allTasks));
 })
+
+fetchAndShowTasks();
